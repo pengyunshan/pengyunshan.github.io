@@ -104,6 +104,42 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 400 + index * 150);
     });
 
+    // ---------- Photo Lightbox ----------
+    const lightbox = document.getElementById('photoLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.news-photo-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const imgSrc = this.getAttribute('data-img');
+            const imgTitle = this.getAttribute('data-title') || '';
+            if (imgSrc) {
+                lightboxImg.src = imgSrc;
+                lightboxTitle.textContent = imgTitle;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => { lightboxImg.src = ''; }, 300);
+    }
+
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightbox) lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
     // ---------- Hide Scholar link if no URL ----------
     const scholarLink = document.getElementById('scholar-link');
     if (scholarLink && scholarLink.getAttribute('href') === '#') {
