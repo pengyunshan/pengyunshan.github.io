@@ -182,7 +182,20 @@ a:hover {
 .education {
     font-size: 1.05rem;
     color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.education-secondary {
+    font-size: 0.95rem;
+    color: var(--text-muted);
     margin-bottom: 16px;
+}
+
+.education-secondary i {
+    color: var(--accent);
+    margin-right: 6px;
+    width: 20px;
+    text-align: center;
 }
 
 .research-intro {
